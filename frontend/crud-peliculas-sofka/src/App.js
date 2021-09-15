@@ -12,7 +12,7 @@ function App()
 
   return (
     <div className="container-fluid">
-        <CreateMovie/>
+        <CreateMovie movies={movies}  setMovies={setMovies}/>
         <UpdateMovie currentMovie={currentMovie} setCurrentMovie={setCurrentMovie} 
          movies={movies}  setMovies={setMovies} />
         <ListAll currentMovie={currentMovie} setCurrentMovie={setCurrentMovie} 

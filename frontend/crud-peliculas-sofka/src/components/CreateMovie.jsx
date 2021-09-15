@@ -1,7 +1,7 @@
 import React, {Fragment, useState} from 'react'
 
 
-const CreateMovie = () => {
+const CreateMovie = (props) => {
     const[dates, setDates] = useState({
         name: '',
         gender: '',
@@ -10,6 +10,7 @@ const CreateMovie = () => {
         description: ''
 
     });
+    const [messageStatus, setMessageStatus] = useState();
 
     const handleInputChange = (event, data) => {
         
@@ -26,12 +27,12 @@ const CreateMovie = () => {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(dates)
-        }).then((response) => {console.log(response);})
+        }).then((response) => {setMessageStatus("Pelicula creada exitosamente")})
     
         
         event.target.reset();
         event.preventDefault();
-        console.log(dates)
+        props.setMovies([...props.movies, dates]);
     }
 
 
@@ -46,6 +47,7 @@ const CreateMovie = () => {
                     <input name="directory" onChange={handleInputChange} className="form-control form-control my-2" type="text" placeholder="Director de la Pelicula" aria-label=".form-control-sm example"></input>
                     <input name="year" onChange={handleInputChange} className="form-control form-control my-2" type="number" placeholder="Año de la Pelicula" aria-label=".form-control-sm example"></input>
                     <textarea name="description" onChange={handleInputChange} id="" cols="58" rows="3" placeholder="Ingresa una breve descripción"></textarea>
+                    <p>{messageStatus}</p>
                     <div className="col-md-6" >
                         <button className="btn btn-primary col-md-6" type="submit">Crear</button>
                     </div>

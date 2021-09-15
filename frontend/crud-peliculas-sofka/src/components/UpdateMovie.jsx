@@ -16,8 +16,8 @@ const UpdateMovie = (props) =>
             method: "PUT",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(data)
-        }).then((response) => response.json())
-        .then(() => {setMessageStatus("Pelicula actualizada exitosamente");});
+        }).then((response) => {response.status==200?setMessageStatus("Pelicula actualizada exitosamente"):
+                                setMessageStatus("Error! por favor seleccione una pelicula primero")});
 
         props.setMovies(props.movies.map((movie)=> movie.id === data.id?data:movie))
         props.setCurrentMovie(data);
