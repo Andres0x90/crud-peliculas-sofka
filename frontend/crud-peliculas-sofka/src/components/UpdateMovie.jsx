@@ -9,16 +9,21 @@ const UpdateMovie = () =>
 
     const onSubmit = (data) =>
     {
+        data.id=4;
+
         fetch('http://localhost:8080/api/movies/update',
         {
             method: "PUT",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(data)
-        }).then((response) => {console.log(response);})
+        }).then((response) => response.json())
+        .then((data) => console.log(data));
     }
+
     return(
         <Fragment>
             <form className="row col-4" onSubmit={handleSubmit(onSubmit)}>
+                <h1>Actualizar Pelicula</h1>
                 <div>
                     <label className="form-label">Nombre</label>
                     <input className="form-control" type="text" 
