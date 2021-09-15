@@ -1,20 +1,18 @@
 import React, {  useState, useEffect } from 'react'
 
-const ListAll = () =>
+const ListAll = (props) =>
 {
-    const [movies, setMovies] = useState([]);
-
     useEffect(() => {
-        onChange();
+        getAllMovies();
     }, []);
 
-    const onChange= () => {
+    const getAllMovies= () => {
         fetch('http://localhost:8080/api/movies/list',
         {
             method: "GET",
             headers: { "Content-Type": "application/json" }
         }).then((response) =>  response.json())
-        .then((data) => {setMovies(data);});
+        .then((data) => {props.setMovies(data);});
     }      
 
     return (
@@ -32,15 +30,15 @@ const ListAll = () =>
             </thead>
             <tbody>
                 {
-                    movies.map((movie) => 
+                    props.movies.map((movie) => 
                     {
                         return(
-                            <tr>
+                            <tr key={movie.id}>
                                 <td>{movie.name}</td>
                                 <td>{movie.gender}</td>
                                 <td>{movie.directory}</td>
                                 <td>{movie.year}</td>
-                                <td><button>Editar</button></td>
+                                <td><button onClick={()=>{props.setCurrentMovie(movie);}}>Editar</button></td>
                                 <td><button>Eliminar</button></td>
                             </tr>
                         )
