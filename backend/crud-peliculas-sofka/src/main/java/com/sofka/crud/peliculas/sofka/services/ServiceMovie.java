@@ -3,11 +3,13 @@ package com.sofka.crud.peliculas.sofka.services;
 import com.sofka.crud.peliculas.sofka.entities.Movie;
 import com.sofka.crud.peliculas.sofka.repositories.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Service
 public class ServiceMovie implements InterfaceServiceMovie{
 
     @Autowired

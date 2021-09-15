@@ -1,14 +1,19 @@
 package com.sofka.crud.peliculas.sofka.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import org.hibernate.engine.jdbc.Size;
+
+import javax.persistence.*;
 
 @Entity
-@Table(name="movie")
+@Table(name="movies")
 public class Movie
 {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
-    private String name, year, directory, gender, description;
+    private String name, year, directory, gender;
+    @Column(length = 500)
+    private String description;
 
     public Movie()
     {
