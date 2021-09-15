@@ -19,8 +19,9 @@ const UpdateMovie = () =>
         }).then((response) => response.json())
         .then((data) => console.log(data));
     }
+
     return(
-        <Fragment> 
+        <Fragment>
             <form className="row col-4" onSubmit={handleSubmit(onSubmit)}>
                 <h1>Actualizar Pelicula</h1>
                 <div>
