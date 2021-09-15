@@ -13,7 +13,18 @@ const ListAll = (props) =>
             headers: { "Content-Type": "application/json" }
         }).then((response) =>  response.json())
         .then((data) => {props.setMovies(data);});
-    }      
+    }   
+    
+    const deleteMovie = (id) => {
+        fetch(`http://localhost:8080/api/movies/remove/${id}`,
+            {
+                method: "DELETE",
+                headers: { "Content-Type": "application/json" },
+            }).then((response) => { console.log(response); })
+            .then((data)=>{console.log(data);});
+
+        props.setMovies(props.movies.filter(movie => movie.id !== id));
+    }
 
     return (
         <>
@@ -39,7 +50,7 @@ const ListAll = (props) =>
                                 <td>{movie.directory}</td>
                                 <td>{movie.year}</td>
                                 <td><button onClick={()=>{props.setCurrentMovie(movie);}}>Editar</button></td>
-                                <td><button>Eliminar</button></td>
+                                <td><button onClick={()=>{deleteMovie(movie.id)}}>Eliminar</button></td>
                             </tr>
                         )
                     })

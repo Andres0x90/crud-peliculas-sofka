@@ -27,12 +27,11 @@ const CreateMovie = (props) => {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(dates)
-        }).then((response) => {setMessageStatus("Pelicula creada exitosamente")})
+        }).then((response) => {setMessageStatus("Pelicula creada exitosamente");return response.json();}).
+        then((data) => {props.setMovies([...props.movies, data]);});
     
-        
         event.target.reset();
         event.preventDefault();
-        props.setMovies([...props.movies, dates]);
     }
 
 
@@ -46,7 +45,7 @@ const CreateMovie = (props) => {
                     <input name="gender" onChange={handleInputChange} className="form-control form-control my-2" type="text" placeholder="Genero de la Pelicula" aria-label=".form-control-sm example"></input>
                     <input name="directory" onChange={handleInputChange} className="form-control form-control my-2" type="text" placeholder="Director de la Pelicula" aria-label=".form-control-sm example"></input>
                     <input name="year" onChange={handleInputChange} className="form-control form-control my-2" type="number" placeholder="Año de la Pelicula" aria-label=".form-control-sm example"></input>
-                    <textarea name="description" onChange={handleInputChange} id="" cols="58" rows="3" placeholder="Ingresa una breve descripción"></textarea>
+                    <textarea className="form-control form-control my-2" name="description" onChange={handleInputChange} id="" cols="58" rows="3" placeholder="Ingresa una breve descripción"></textarea>
                     <p>{messageStatus}</p>
                     <div className="col-md-6" >
                         <button className="btn btn-primary col-md-6" type="submit">Crear</button>
